@@ -1,0 +1,51 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+<form class="shell-form">
+    <input class="shell-input" id="command" type="text" name="id" autocomplete="off" placeholder="enter the command"
+           autofocus>
+    <input class="shell-input" id="command-desc" type="text" name="id2" autocomplete="off"
+           placeholder="enter the command description">
+    <button class="shell-submit" type="submit">START</button>
+</form>
+
+<ul id="results"></ul>
+
+
+<script>
+
+    $('.shell-form').submit(function (e) {
+
+        e.preventDefault();
+
+        var eventList = document.getElementById("results");
+        var newElement = document.createElement("li");
+
+        var shell = $('#command').val();
+        var shellCom = $('#command-desc').val();
+
+        var ajaxTime = new Date().getTime()
+
+        $.post('/',
+                {
+                    shell: shell,
+                    shellCom: shellCom
+                },
+                function (data) {
+
+                    var totalTime = new Date().getTime() - ajaxTime;
+
+                    console.log(shell);
+                    console.log(totalTime + ' ms');
+
+                    newElement.innerHTML = '<span class="shell-title">'+shell+'</span>' + '<br>'
+                            + shellCom + '<br>'
+                            + '<span class="response">Response : </span>' + data + '<br>'
+                            + '<span class="time">Time : </span>' + totalTime + ' ms' + '<br>'
+                            + '<span class="status">Status : </span>' + 'success';
+
+                    eventList.appendChild(newElement);
+                }
+        )
+    });
+</script>
