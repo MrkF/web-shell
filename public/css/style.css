@@ -1,0 +1,99 @@
+body {
+    background-color: black;
+    color: #ff742e;
+    font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+.title {
+    display: inline-block;
+}
+
+.shell-input {
+    display: block;
+    width: 300px;
+    height: 50px;
+    margin: 15px auto;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #07090b;
+    border: none;
+    color: #ff742e;
+}
+
+.shell-input:focus {
+    outline: 1px solid #ff742e;
+}
+
+.shell-submit {
+    display: block;
+    width: 300px;
+    height: 50px;
+    margin: 0 auto;
+    background-color: transparent;
+    border: none;
+    color: #ff742e;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.shell-submit:focus {
+    outline: none;
+}
+
+#results {
+    list-style: none;
+    color: #ffeedd;
+    width: 1000px;
+    margin: 100px auto;
+}
+
+#results li {
+    margin: 20px 0;
+    border-bottom: 1px solid white;
+}
+
+.time {
+    color: #FFBF00;
+    line-height: 60px;
+}
+
+.status {
+    color: #FFBF00;
+    margin-top: 15px;
+}
+
+.response {
+    color: #FFBF00;
+}
+
+.shell-title {
+    color: #ff742e;
+}
+
+header {
+
+}
+
+.nav {
+    display: inline-block;
+    vertical-align: middle;
+}
+.nav li {
+    display: block;
+    float: left;
+    list-style: none;
+    margin: 5px 15px;
+}
+
+.nav li a {
+    text-decoration: none;
+    color: #ff742e;
+}
+
+.nav li a.active {
+    text-decoration: underline;
+    color: white;
+}
