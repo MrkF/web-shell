@@ -6,7 +6,6 @@
     </ul>
 </header>
 
-
 <form class="shell-form" method="post">
     <input class="shell-input" id="command" type="text" name="id" autocomplete="off" placeholder="enter the command"
            autofocus>
@@ -24,73 +23,19 @@
 
         e.preventDefault();
 
-        var history = {};
         var shell = $('#command').val();
         var shellCom = $('#command-desc').val();
-
-        var startTime = formatDate(new Date());
+//        var startTime = formatDate(new Date());
 
         $.post('/',
                 {
                     shell: shell,
-                    shellCom: shellCom
+                    shellCom: shellCom,
                 },
                 function (data) {
 
-                    var endTime = formatDate(new Date());
-
-//                    console.log(shell);
-//                    console.log(data);
-//                    newElement.innerHTML = '<time class="time">' + startTime + '</time>' + ' : '
-//                            + '<span class="shell-title">' + shell + '</span>' + '<br>'
-//                            + shellCom + '<br>'
-//                            + '<span class="response">Response : </span>' + data + '<br>'
-//                            + '<time class="time">' + endTime + '</time>' + ' : ' + 'success';
-
-//                    impArr.push(shell,shellCom,startTime,endTime,data)
-
-
-                    history = {
-                        command: shell,
-                        comment: shellCom,
-                        response: data,
-                        startTime: startTime,
-                        endTime: endTime
-                    };
-//                    var impJson = JSON.stringify(impArr);
-//                    var impJson = JSON.stringify(impObj);
-
-                    var serialObj = JSON.stringify(history);
-
-                    localStorage.setItem("Result", serialObj);
-
-//                    var returnObj = JSON.parse(localStorage.getItem("Result")) //спарсим его обратно объект
-//
-                    console.log(serialObj);
-////                    console.log(returnObj);
-//
-//                    eventList.append(newElement);
+                    console.log(shell)
                 }
         )
     });
-
-
-    function formatDate(dateField) {
-
-        var ms = dateField.getMilliseconds();
-        if (ms < 10) ms = '0' + ms;
-
-        var ss = dateField.getSeconds();
-        if (ss < 10) ss = '0' + ss;
-
-        var mn = dateField.getMinutes();
-        if (mn < 10) mn = '0' + mn;
-
-        var hh = dateField.getHours();
-        if (hh < 10) hh = '0' + hh;
-
-        return hh + ':' + mn + ':' + ss + ':' + ms;
-    }
-
-
 </script>

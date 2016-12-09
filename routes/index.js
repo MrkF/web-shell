@@ -4,8 +4,6 @@ var router = express.Router();
 
 var history = [];
 
-/* GET home page. */
-
 router.get('/', function (req, res, next) {
     res.render('index', {title: 'web terminal'});
 });
@@ -13,13 +11,23 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
     var shell = req.body.shell;
+    var shellCom = req.body.shellCom;
+    // var startTime = req.body.startTime;
+
+    var startTime = formatDate(new Date());
 
     exec(shell, function (error, stdout, stderr) {
 
+        var endTime = formatDate(new Date());
+
         history.push({
             command: shell,
-            result: stdout
+            comment: shellCom,
+            result: stdout,
+            startTime: startTime,
+            endTime: endTime
         })
+
         res.send(stdout);
 
         console.log('stdout: ' + stdout);
@@ -32,17 +40,27 @@ router.post('/', function (req, res, next) {
 
 });
 
+function formatDate(dateField) {
+
+    var ms = dateField.getMilliseconds();
+    if (ms < 10) ms = '0' + ms;
+
+    var ss = dateField.getSeconds();
+    if (ss < 10) ss = '0' + ss;
+
+    var mn = dateField.getMinutes();
+    if (mn < 10) mn = '0' + mn;
+
+    var hh = dateField.getHours();
+    if (hh < 10) hh = '0' + hh;
+
+    return hh + ':' + mn + ':' + ss + ':' + ms;
+}
+
 
 router.get('/result', function (req, res, next) {
-    res.render('result', {title: 'Result'});
+
+    res.render('result', {title: 'web terminal', result: history});
 });
-
-// router.get('/test', function(req, res, next) {
-//     res.render('test', { title: 'Express' });
-// });
-
-// router.post('/test/submit', function(req, res, next) {
-//     res.redirect('/test')
-// });
 
 module.exports = router;

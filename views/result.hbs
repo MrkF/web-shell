@@ -6,28 +6,18 @@
     </ul>
 </header>
 
-<div id="result"></div>
+<ul id="result">
+    {{# each result }}
 
-<script>
-
-    for (var i = 0; i < localStorage.length; i++) {
-        var item = $.parseJSON(localStorage.getItem(localStorage.key(i)));
-
-        var eventList = $("#result");
-        var newElement = document.createElement("li");
-
-        console.log(item);
-
-        newElement.innerHTML = '<time class="time">' + item.startTime + '</time>' + ' : '
-                + '<span class="shell-title">' + item.command + '</span>' + ' '
-                + item.comment + '<br>'
-                + '<span class="response">Response : </span>' + item.response + '<br>'
-                + '<time class="time">' + item.endTime + '</time>' + ' : ' + 'success';
-
-        eventList.append(newElement);
-    }
-
-</script>
+        <li>
+            <time class="time">{{this.startTime}}</time>
+            : <span class="shell-title">{{this.command}}</span>
+            {{this.comment}} </br>
+            <span class="response">Response : </span> {{this.result}} </br>
+            <time class="time">{{this.endTime}}</time>
+            : success
+        </li>
 
 
-
+    {{/each}}
+</ul>
