@@ -39,18 +39,22 @@ a {
     font-size: 18px;
 }
 
+.shell-submit:active {
+    color: cyan;
+}
+
 .shell-submit:focus {
     outline: none;
 }
 
-#results {
+#result {
     list-style: none;
     color: #ffeedd;
     width: 1000px;
     margin: 100px auto;
 }
 
-#results li {
+#result li {
     margin: 20px 0;
     border-bottom: 1px solid white;
 }

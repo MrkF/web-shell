@@ -6,16 +6,28 @@
     </ul>
 </header>
 
+<div id="result"></div>
 
+<script>
 
+    for (var i = 0; i < localStorage.length; i++) {
+        var item = $.parseJSON(localStorage.getItem(localStorage.key(i)));
 
+        var eventList = $("#result");
+        var newElement = document.createElement("li");
 
-{{# each anyArray}}
+        console.log(item);
 
-    {{this}}
+        newElement.innerHTML = '<time class="time">' + item.startTime + '</time>' + ' : '
+                + '<span class="shell-title">' + item.command + '</span>' + ' '
+                + item.comment + '<br>'
+                + '<span class="response">Response : </span>' + item.response + '<br>'
+                + '<time class="time">' + item.endTime + '</time>' + ' : ' + 'success';
 
-{{/each}}
+        eventList.append(newElement);
+    }
 
+</script>
 
 
 
