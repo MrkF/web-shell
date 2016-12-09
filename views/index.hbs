@@ -2,7 +2,7 @@
     <h1 class="title">{{title}}</h1>
     <ul class="nav">
         <li><a class="active" href="/">Terminal</a></li>
-        <li><a href="./results">Results</a></li>
+        <li><a href="./result">Result</a></li>
     </ul>
 </header>
 
@@ -24,13 +24,16 @@
 
         e.preventDefault();
 
-        var eventList = document.getElementById("results");
+        var impObj = {};
+        var impArr = [];
+        var eventList = $("#results");
         var newElement = document.createElement("li");
 
         var shell = $('#command').val();
         var shellCom = $('#command-desc').val();
 
-        var startTime = new Date();
+        var startTime = formatDate(new Date());
+
 
         $.post('/',
                 {
@@ -39,17 +42,31 @@
                 },
                 function (data) {
 
-                    var endTime = new Date();
+                    var endTime = formatDate(new Date());
 
                     console.log(shell);
 
-                    newElement.innerHTML = '<span class="time">' + formatDate(startTime) + '</span>' + ' : '
+                    newElement.innerHTML = '<time class="time">' + startTime + '</time>' + ' : '
                             + '<span class="shell-title">' + shell + '</span>' + '<br>'
                             + shellCom + '<br>'
                             + '<span class="response">Response : </span>' + data + '<br>'
-                            + '<span class="time">' + formatDate(endTime) + '</span>' + ' : ' + 'success';
+                            + '<time class="time">' + endTime + '</time>' + ' : ' + 'success';
 
-                    eventList.appendChild(newElement);
+
+//                    impArr.push(shell,shellCom,startTime,endTime,data)
+                    impObj = {
+                            command: shell,
+                            comment: shellCom,
+                            response: data,
+                            startTime: startTime
+                    };
+
+
+//                    var impJson = JSON.stringify(impArr);
+                    var impJson = JSON.stringify(impObj);
+                    console.log(impJson);
+
+                    eventList.append(newElement);
                 }
         )
     });
