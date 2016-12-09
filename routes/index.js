@@ -4,12 +4,15 @@ var router = express.Router();
 
 
 
+/* GET home page. */
+
 router.get('/', function (req, res, next) {
     res.render('index', {title: 'web terminal'});
 });
 
 
 router.post('/', function (req, res, next) {
+
 
     var shell = req.body.shell;
 
@@ -24,10 +27,12 @@ router.post('/', function (req, res, next) {
             console.log('exec error: ' + error);
         }
     });
+
 });
 
 router.get('/result', function (req, res, next) {
     res.render('result', {title: 'Result', anyArray: ['command', 'shell']});
+
 });
 
 
@@ -38,7 +43,5 @@ router.get('/result', function (req, res, next) {
 // router.post('/test/submit', function(req, res, next) {
 //     res.redirect('/test')
 // });
-
-
 
 module.exports = router;
