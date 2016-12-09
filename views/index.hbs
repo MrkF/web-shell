@@ -1,0 +1,76 @@
+<header>
+    <h1 class="title">{{title}}</h1>
+    <ul class="nav">
+        <li><a class="active" href="/">Terminal</a></li>
+        <li><a href="./results">Results</a></li>
+    </ul>
+</header>
+
+
+<form class="shell-form" method="post">
+    <input class="shell-input" id="command" type="text" name="id" autocomplete="off" placeholder="enter the command"
+           autofocus>
+    <input class="shell-input" id="command-desc" type="text" name="id2" autocomplete="off"
+           placeholder="enter the command description">
+    <button class="shell-submit" type="submit">START</button>
+</form>
+
+<ul id="results"></ul>
+
+
+<script>
+
+    $('.shell-form').submit(function (e) {
+
+        e.preventDefault();
+
+        var eventList = document.getElementById("results");
+        var newElement = document.createElement("li");
+
+        var shell = $('#command').val();
+        var shellCom = $('#command-desc').val();
+
+        var startTime = new Date();
+
+        $.post('/',
+                {
+                    shell: shell,
+                    shellCom: shellCom
+                },
+                function (data) {
+
+                    var endTime = new Date();
+
+                    console.log(shell);
+
+                    newElement.innerHTML = '<span class="time">' + formatDate(startTime) + '</span>' + ' : '
+                            + '<span class="shell-title">' + shell + '</span>' + '<br>'
+                            + shellCom + '<br>'
+                            + '<span class="response">Response : </span>' + data + '<br>'
+                            + '<span class="time">' + formatDate(endTime) + '</span>' + ' : ' + 'success';
+
+                    eventList.appendChild(newElement);
+                }
+        )
+    });
+
+
+    function formatDate(dateField) {
+
+        var ms = dateField.getMilliseconds();
+        if (ms < 10) ms = '0' + ms;
+
+        var ss = dateField.getSeconds();
+        if (ss < 10) ss = '0' + ss;
+
+        var mn = dateField.getMinutes();
+        if (mn < 10) mn = '0' + mn;
+
+        var hh = dateField.getHours();
+        if (hh < 10) hh = '0' + hh;
+
+        return hh + ':' + mn + ':' + ss + ':' + ms;
+    }
+
+
+</script>
