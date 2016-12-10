@@ -12,7 +12,6 @@ router.post('/', function (req, res, next) {
 
     var shell = req.body.shell;
     var shellCom = req.body.shellCom;
-    // var startTime = req.body.startTime;
 
     var startTime = formatDate(new Date());
 
